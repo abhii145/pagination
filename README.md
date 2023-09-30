@@ -1,8 +1,13 @@
-# React + Vite
+# React Pagination Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a React Pagination Project that demonstrates the functionality of pagination in a web application. Pagination is a common UI pattern used to divide a large dataset into smaller, more manageable pages. This project provides a simple example of how to implement pagination in a React application.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Features
+This React Pagination Project demonstrates the following features:
+
+- Pagination of a list of items.
+- Navigation buttons to move between pages.
+- Display the current page and total number of pages.
+- Dynamically adjusting the number of items displayed per page.
+- Handling edge cases such as when there are no items or when there is only one page.
