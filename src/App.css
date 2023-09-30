@@ -1,0 +1,94 @@
+/* App.css */
+
+.product-container {
+  display: grid;
+  grid-gap: 20px;
+  justify-items: center;
+  margin: 20px;
+}
+
+.product-card {
+  background-color: #f9f9f9;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 300px; /* Limit the card width if needed */
+  width: 100%;
+}
+
+.product-card img {
+  max-width: 100%;
+  height: 200px;
+  object-fit: contain;
+}
+
+.product-title {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+@media (min-width: 768px) {
+  /* On larger screens, display 3 items per row */
+  .product-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  /* On smaller screens, display 2 items per row */
+  .product-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Basic styles for pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination span {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  margin: 0 5px;
+  transition: background-color 0.3s ease; /* Add a transition for smooth hover effect */
+}
+
+/* Hover effect for pagination buttons */
+.pagination__selected{
+  background-color: rgb(48, 184, 112);
+}
+
+/* Previous and Next buttons */
+.pagination .prev,
+.pagination .next {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+}
+
+/* Page numbers container */
+.page-numbers {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Page number styling */
+.page-numbers span {
+  background-color: #ffffff;
+  color: #007bff;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .page-numbers {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+
+
