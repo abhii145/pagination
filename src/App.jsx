@@ -4,12 +4,15 @@ import "./App.css";
 const App = () => {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState(""); 
+  const [filteredProducts, setFilteredProducts] = useState([]); 
 
   const fetchProducts = async () => {
     const res = await fetch("https://dummyjson.com/products?limit=100");
     const data = await res.json();
     if (data && data.products) {
       setProducts(data.products);
+      setFilteredProducts(data.products); 
     }
   };
 
@@ -17,26 +20,48 @@ const App = () => {
     setPage(pageNo);
   };
 
+  const handleSearch = (event) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+
+    
+    const filtered = products.filter(
+      (product) =>
+        product.title.toLowerCase().includes(query.toLowerCase()) ||
+        product.brand.toLowerCase().includes(query.toLowerCase()) ||
+        product.category.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredProducts(filtered);
+  };
+
   useEffect(() => {
     fetchProducts();
   }, []);
 
-  if (!products) {
-    return <div>...loading</div>;
-  }
-
   return (
-    <div>
-      <div className="product-container">
-        {products.slice(page * 10 - 10, page * 10).map((product) => (
-          <div className="product-card" key={product.id}>
-            <img src={product.thumbnail} alt={product.thumbnail} />
-            <div className="product-title">{product.title}</div>
-          </div>
-        ))}
-      </div>
-
-      {products.length > 0 && (
+    <div className="app-container">
+      <input
+        type="text"
+        placeholder="Search products"
+        value={searchQuery}
+        onChange={handleSearch}
+        className="search-box"
+      />
+  
+      {filteredProducts.length === 0 ? (
+        <div>No products found</div>
+      ) : (
+        <div className="product-container">
+          {filteredProducts.slice(page * 10 - 10, page * 10).map((product) => (
+            <div className="product-card" key={product.id}>
+              <img src={product.thumbnail} alt={product.thumbnail} />
+              <div className="product-title">{product.title}</div>
+            </div>
+          ))}
+        </div>
+      )}
+  
+      {filteredProducts.length > 0 && (
         <div className="pagination">
           {page === 1 ? (
             ""
@@ -45,9 +70,9 @@ const App = () => {
               Previous
             </span>
           )}
-
+  
           <div>
-            {[...Array(products.length / 10)].map((_, i) => {
+            {[...Array(Math.ceil(filteredProducts.length / 10))].map((_, i) => {
               return (
                 <span
                   key={i}
@@ -59,7 +84,7 @@ const App = () => {
               );
             })}
           </div>
-          {page < products.length / 10 ? (
+          {page < Math.ceil(filteredProducts.length / 10) ? (
             <span className="next" onClick={() => setPage(page + 1)}>
               Next
             </span>
@@ -70,6 +95,7 @@ const App = () => {
       )}
     </div>
   );
+  
 };
 
 export default App;
